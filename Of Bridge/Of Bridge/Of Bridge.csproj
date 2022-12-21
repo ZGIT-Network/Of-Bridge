@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net462</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<OutputType>WinExe</OutputType>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<LangVersion>preview</LangVersion>
+		<Nullable>enable</Nullable>
+		<ApplicationManifest>./App.manifest</ApplicationManifest>
+		<ApplicationIcon>AppIcon.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="helper.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="AppIcon.ico" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="ModernWpfUI" Version="10.1.63" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="helper.png" />
+	</ItemGroup>
+</Project>

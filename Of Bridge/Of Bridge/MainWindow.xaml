@@ -1,0 +1,98 @@
+﻿<Window
+    x:Class="Of_Bridge.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+    Title="Of Bridge"
+    Width="830"
+    Height="470"
+    MinWidth="{Binding Width, RelativeSource={RelativeSource Mode=Self}}"
+    MinHeight="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+    MaxWidth="{Binding Width, RelativeSource={RelativeSource Mode=Self}}"
+    MaxHeight="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+    ui:ThemeManager.ActualThemeChanged="Window_ActualThemeChanged"
+    ui:ThemeManager.IsThemeAware="True"
+    Background="{DynamicResource SystemControlPageBackgroundAltHighBrush}"
+    Foreground="{DynamicResource SystemControlPageTextBaseHighBrush}"
+    ResizeMode="CanMinimize"
+    mc:Ignorable="d">
+    <Grid Margin="28,24">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ui:SimpleStackPanel Grid.Column="0" Spacing="8">
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Of Bridge" />
+            <TextBox
+                x:Name="OfBridge_IPInput"
+                ui:ControlHelper.Header="IP 地址 / CNAME 域名"
+                ui:ControlHelper.PlaceholderText="openfrp.net" />
+            <Button
+                VerticalAlignment="Bottom"
+                Click="Button_Click"
+                Content="开始联机"
+                Style="{StaticResource AccentButtonStyle}" />
+            <TextBlock
+                x:Name="OfBridge_Error"
+                Height="Auto"
+                Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}" />
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}">
+                <Run Text="这次是UI大更新 没别的" />
+                <LineBreak />
+                <Hyperlink Click="Hyperlink_Click" NavigateUri="https://github.com/ZGIT-Network/Of-Bridge">
+                    Github
+                </Hyperlink>
+                <LineBreak />
+                <Hyperlink Click="Hyperlink_Click" NavigateUri="https://www.openfrp.net/">
+                    OpenFrp.net
+                </Hyperlink>
+            </TextBlock>
+        </ui:SimpleStackPanel>
+
+
+        <TabControl Grid.Column="2" Style="{StaticResource TabControlPivotStyle}">
+            <TabItem Header="如何使用">
+                <TextBlock Margin="0,8,0,0" Style="{StaticResource BodyTextBlockStyle}">
+                    <Run Text="这个是给联机方用的，如果是开联机的话你可以关掉这个软件了" /><LineBreak />
+                    <Run Text="把 对方给的域名(不知道就看做一串 看不懂的东西)，填进去。" /><LineBreak />
+                    <Run Text="点击开始联机,就可以开始畅游了。" />
+                    <Viewbox
+                        MaxHeight="250"
+                        Margin="0,12,0,0"
+                        Stretch="UniformToFill">
+                        <Image Source="./helper.png" />
+                    </Viewbox>
+                </TextBlock>
+            </TabItem>
+            <TabItem Header="设置">
+                <ui:SimpleStackPanel Margin="0,8,0,0" >
+                    <ui:NumberBox
+                        x:Name="OfApp_Number"
+                        ui:ControlHelper.Header="Buffer Size"
+                        Minimum="1536"
+                        SpinButtonPlacementMode="Inline"
+                        Value="2048" />
+                    <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}">
+                        <Run Text="值过小的时候,Mods联机可能会频繁中断。" />
+                        <LineBreak />
+                        <Run Text="您就需要设置大一些(如4096)" />
+                    </TextBlock>
+                </ui:SimpleStackPanel>
+            </TabItem>
+            <TabItem Header="日志">
+                <TextBox
+                    IsReadOnly="True"
+                    x:Name="Of_Log"
+                    Margin="0,4,0,0"
+                    ui:ScrollViewerHelper.AutoHideScrollBars="True"
+                    ui:TextBoxHelper.IsDeleteButtonVisible="False"
+                    BorderThickness="0"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto" />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
