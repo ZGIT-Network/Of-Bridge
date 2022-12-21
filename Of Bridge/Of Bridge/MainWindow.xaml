@@ -68,11 +68,11 @@
                 </TextBlock>
             </TabItem>
             <TabItem Header="设置">
-                <ui:SimpleStackPanel Margin="0,8,0,0" >
+                <ui:SimpleStackPanel Margin="0,8,0,0">
                     <ui:NumberBox
                         x:Name="OfApp_Number"
-                        ui:ControlHelper.Header="Buffer Size"
-                        Minimum="1536"
+                        ui:ControlHelper.Header="区块缓存大小"
+                        Minimum="768"
                         SpinButtonPlacementMode="Inline"
                         Value="2048" />
                     <TextBlock Margin="0,8,0,0" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}">
@@ -84,13 +84,13 @@
             </TabItem>
             <TabItem Header="日志">
                 <TextBox
-                    IsReadOnly="True"
                     x:Name="Of_Log"
                     Margin="0,4,0,0"
                     ui:ScrollViewerHelper.AutoHideScrollBars="True"
                     ui:TextBoxHelper.IsDeleteButtonVisible="False"
                     BorderThickness="0"
                     HorizontalScrollBarVisibility="Auto"
+                    IsReadOnly="True"
                     VerticalScrollBarVisibility="Auto" />
             </TabItem>
         </TabControl>

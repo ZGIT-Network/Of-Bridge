@@ -100,8 +100,16 @@ namespace Of_Bridge
                         }
                         catch(Exception ex)
                         {
-                            client?.Disconnect(false);
-                            server?.Close();
+
+                            try
+                            {
+                                client?.Disconnect(false);
+                                server?.Close();
+                            }
+                            catch (Exception e2x)
+                            {
+                                Append(e2x.ToString());
+                            }
                             AppState = false;
                             Append(ex.ToString());
                         }
