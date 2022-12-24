@@ -80,7 +80,13 @@ namespace Of_Bridge
                     serverSocket.Listen(100);
                     AppState = true;
                     
-                    new Thread(() => MotdBroadCaster((serverSocket.LocalEndPoint as IPEndPoint)!.Port))
+                    new Thread(() =>
+                    {
+                        if (!MotdBroadCaster((serverSocket.LocalEndPoint as IPEndPoint)!.Port))
+                        {
+                            AppState = false;
+                        }
+                    })
                         .Start();
                     new Thread(() =>
                     {
@@ -139,15 +145,23 @@ namespace Of_Bridge
             Of_Log.AppendText($"\n[{DateTimeOffset.Now}] {str}");
         });
 
-        private void MotdBroadCaster(int port)
+        private bool MotdBroadCaster(int port)
         {
-            UdpClient udpClient = new("224.0.2.60", 4445);
-            byte[] bytes = Encoding.UTF8.GetBytes($"[MOTD]§eOf Bridge 2.0 || 双击进入[/MOTD][AD]{port}[/AD]");
-            Append("联机广播已开启!!!");
-            while (AppState)
+            try
             {
-                udpClient.Send(bytes, bytes.Length);
+                UdpClient udpClient = new("224.0.2.60", 4445);
+                byte[] bytes = Encoding.UTF8.GetBytes($"[MOTD]§eOf Bridge 2.0 || 双击进入[/MOTD][AD]{port}[/AD]");
+                Append("联机广播已开启!!!");
+                while (AppState)
+                {
+                    udpClient.Send(bytes, bytes.Length);
+                }
             }
+            catch(Exception ex)
+            {
+                Append("UDP 发包失败," + ex);
+            }
+            return false;
         }
         private void Forward(Socket s,Socket c)
         {

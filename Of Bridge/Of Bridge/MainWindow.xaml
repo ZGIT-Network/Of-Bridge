@@ -42,6 +42,8 @@
             <TextBlock Style="{StaticResource BodyTextBlockStyle}">
                 <Run Text="这次是UI大更新 没别的" />
                 <LineBreak />
+                <Run Text="如果域名正确仍然显示域名不正确，请看看是不是前面有空格。" />
+                <LineBreak />
                 <Hyperlink Click="Hyperlink_Click" NavigateUri="https://github.com/ZGIT-Network/Of-Bridge">
                     Github
                 </Hyperlink>
